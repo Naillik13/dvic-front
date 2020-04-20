@@ -32,6 +32,8 @@ export default {
     }
   },
   created () {
+    localStorage.removeItem('user-token')
+
     HTTP.get('users').then(response => {
       // JSON responses are automatically parsed.
       this.clients = response.data
