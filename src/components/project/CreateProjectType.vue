@@ -37,7 +37,6 @@ export default {
   methods: {
     createProjectType: function () {
       const { code, label } = this
-      console.log(this.company.companyId)
       HTTP.post('project-types', {code: code, label: label, company: this.company.companyId}).then(_ => {
         this.$router.push('/')
       }).catch(err => {

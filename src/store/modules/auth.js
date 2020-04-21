@@ -71,6 +71,7 @@ const mutations = {
   [AUTH_LOGOUT]: state => {
     state.token = ''
     state.userId = ''
+    delete HTTP.defaults.headers.common['Authorization']
   }
 }
 

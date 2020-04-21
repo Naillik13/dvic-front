@@ -51,4 +51,8 @@ export default {
     background-color: #42b983;
     border-color: #42b983;
   }
+  .btn:hover {
+    background-color: #1b5f40;
+    border-color: #1b5f40;
+  }
 </style>

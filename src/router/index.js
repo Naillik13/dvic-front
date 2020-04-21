@@ -8,6 +8,8 @@ import SignUp from '@/components/SignUp'
 import CreateCompany from '@/components/CreateCompany'
 import CreateClient from '@/components/client/CreateClient'
 import CreateProjectType from '@/components/project/CreateProjectType'
+import CreateProject from '@/components/project/CreateProject'
+import ProjectList from '@/components/project/ProjectList'
 
 Vue.use(Router)
 
@@ -83,6 +85,18 @@ export default new Router({
       path: '/create-project-type',
       name: 'CreateProjectType',
       component: CreateProjectType,
+      beforeEnter: ifAuthenticatedAndCompanyExist
+    },
+    {
+      path: '/create-project',
+      name: 'CreateProject',
+      component: CreateProject,
+      beforeEnter: ifAuthenticatedAndCompanyExist
+    },
+    {
+      path: '/projects',
+      name: 'ProjectList',
+      component: ProjectList,
       beforeEnter: ifAuthenticatedAndCompanyExist
     }
   ]

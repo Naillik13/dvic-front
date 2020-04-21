@@ -34,6 +34,7 @@ const actions = {
   [COMPANY_REQUEST]: ({ commit, dispatch }, company) => {
     return new Promise((resolve, reject) => {
       commit(COMPANY_REQUEST)
+      console.log(HTTP.defaults.headers.common['Authorization'])
       HTTP.post('companies', company).then(resp => {
         localStorage.setItem('company-id', resp.data._id)
         localStorage.setItem('company-name', resp.data.name)
@@ -41,7 +42,6 @@ const actions = {
         resolve(resp)
       }).catch((err) => {
         commit(COMPANY_ERROR)
-        dispatch(AUTH_LOGOUT)
         reject(err)
       })
     })

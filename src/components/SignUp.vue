@@ -45,7 +45,6 @@ export default {
   methods: {
     signup: function () {
       const { email, password, passwordConfirmation } = this
-
       HTTP.post('users', {email, password, passwordConfirmation}).then(_ => {
         this.$store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
           this.$router.push('/create-company')
