@@ -3,7 +3,7 @@
     <div class="container">
       <form class="form-signup row" @submit.prevent="createClient">
         <div class="col-6 offset-3">
-          <h1 class="h3 mb-4 font-weight-normal">Create an account for your company</h1>
+          <h1 class="h3 mb-4 font-weight-normal">Create a new client for your company</h1>
           <div>
             <label for="inputClientName">Client name *</label>
             <input required v-model="name" type="text" id="inputClientName" class="form-control mb-3" placeholder="Client name">
@@ -40,7 +40,6 @@ export default {
   methods: {
     createClient: function () {
       const { name, siret, contact } = this
-      console.log(this.company.company._id)
       HTTP.post('clients', {name: name, siret: siret, contact: contact, company: this.company.company._id}).then(_ => {
         this.$router.push('/clients')
       }).catch(err => {

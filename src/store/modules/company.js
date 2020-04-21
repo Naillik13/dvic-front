@@ -4,12 +4,13 @@ import {HTTP} from '../../common/http-common'
 
 const state = {
   status: '',
-  company: localStorage.getItem('company') || {}
+  companyId: localStorage.getItem('company-id') || '',
+  companyName: localStorage.getItem('company-name') || ''
 }
 
 const getters = {
   getCompany: state => state.company,
-  isCompanyLoaded: state => !!state.company
+  isCompanyLoaded: state => !!state.companyId
 }
 
 const actions = {
@@ -18,7 +19,8 @@ const actions = {
       commit(COMPANY_USER_REQUEST)
       HTTP.get('users/' + userId + '/company')
         .then(resp => {
-          localStorage.setItem('company', resp.data)
+          localStorage.setItem('company-id', resp.data._id)
+          localStorage.setItem('company-name', resp.data.name)
           commit(COMPANY_SUCCESS, resp.data)
           resolve(resp)
         })
@@ -33,7 +35,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit(COMPANY_REQUEST)
       HTTP.post('companies', company).then(resp => {
-        localStorage.setItem('company', resp.data)
+        localStorage.setItem('company-id', resp.data._id)
+        localStorage.setItem('company-name', resp.data.name)
         commit(COMPANY_SUCCESS, resp.data)
         resolve(resp)
       }).catch((err) => {
@@ -54,7 +57,8 @@ const mutations = {
   },
   [COMPANY_SUCCESS]: (state, company) => {
     state.status = 'success'
-    state.company = company
+    state.companyId = company._id
+    state.companyName = company.name
   },
   [COMPANY_ERROR]: state => {
     state.status = 'error'

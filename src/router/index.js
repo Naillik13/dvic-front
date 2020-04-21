@@ -7,6 +7,7 @@ import store from '../store'
 import SignUp from '@/components/SignUp'
 import CreateCompany from '@/components/CreateCompany'
 import CreateClient from '@/components/client/CreateClient'
+import CreateProjectType from '@/components/project/CreateProjectType'
 
 Vue.use(Router)
 
@@ -76,6 +77,12 @@ export default new Router({
       path: '/create-client',
       name: 'CreateClient',
       component: CreateClient,
+      beforeEnter: ifAuthenticatedAndCompanyExist
+    },
+    {
+      path: '/create-project-type',
+      name: 'CreateProjectType',
+      component: CreateProjectType,
       beforeEnter: ifAuthenticatedAndCompanyExist
     }
   ]

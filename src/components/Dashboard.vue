@@ -1,9 +1,9 @@
 <template>
   <div class="hello text-center">
-    <h1>Welcome to {{ company.company.name }} dashboard</h1>
+    <h1>Welcome to {{ company.companyName }} dashboard</h1>
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 col-sm-12">
+        <div class="col-lg-5 col-sm-12">
           <div class="row dashboard-section-container">
             <h3 class="col-12 d-flex justify-content-between">Gérer les clients<font-awesome-icon icon="users-cog" /></h3>
             <router-link class="col-4" to="/clients">
@@ -18,10 +18,27 @@
                 <div>Ajouter un client</div>
               </div>
             </router-link>
-            <router-link class="col-4"  to="/clients">
+          </div>
+        </div>
+        <div class="offset-lg-1 col-lg-6 col-sm-12">
+          <div class="row dashboard-section-container">
+            <h3 class="col-12 d-flex justify-content-between">Gérer les projets<font-awesome-icon icon="network-wired" /></h3>
+            <router-link class="col-4" to="/clients">
               <div class="dashboard-section">
-                <font-awesome-icon icon="file-export" />
-                <div>Exporter les clients</div>
+                <font-awesome-icon icon="project-diagram" />
+                <div>Liste des projets</div>
+              </div>
+            </router-link>
+            <router-link class="col-4"  to="/create-client">
+              <div class="dashboard-section">
+                <font-awesome-icon icon="briefcase" />
+                <div>Ajouter un projet</div>
+              </div>
+            </router-link>
+            <router-link class="col-4"  to="/create-project-type">
+              <div class="dashboard-section">
+                <font-awesome-icon icon="tasks" />
+                <div>Créer un type de projet</div>
               </div>
             </router-link>
           </div>

@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faUsersCog, faUserPlus, faUsers, faFileExport, faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faUsersCog, faUserPlus, faUsers, faFileExport, faCheck, faTimes, faProjectDiagram, faBriefcase, faTasks, faNetworkWired} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {HTTP} from './common/http-common'
 
@@ -15,14 +15,16 @@ library.add(faUsers)
 library.add(faFileExport)
 library.add(faCheck)
 library.add(faTimes)
+library.add(faProjectDiagram)
+library.add(faBriefcase)
+library.add(faTasks)
+library.add(faNetworkWired)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
 const token = localStorage.getItem('user-token')
-console.log(localStorage.getItem('user-token'))
-console.log(localStorage.getItem('company'))
 
 if (token) {
   HTTP.defaults.headers.common['Authorization'] = token
