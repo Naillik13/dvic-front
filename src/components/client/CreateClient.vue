@@ -40,7 +40,7 @@ export default {
   methods: {
     createClient: function () {
       const { name, siret, contact } = this
-      HTTP.post('clients', {name: name, siret: siret, contact: contact, company: this.company.company._id}).then(_ => {
+      HTTP.post('clients', {name: name, siret: siret, contact: contact, company: this.company.companyId}).then(_ => {
         this.$router.push('/clients')
       }).catch(err => {
         if (err.response.data) {
@@ -51,11 +51,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .btn-block {
-    color: #fff;
-    background-color: #42b983;
-    border-color: #42b983;
-  }
-</style>

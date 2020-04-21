@@ -46,6 +46,9 @@ const actions = {
     return new Promise(resolve => {
       commit(AUTH_LOGOUT)
       localStorage.removeItem('user-token')
+      localStorage.removeItem('user-id')
+      localStorage.removeItem('company-id')
+      localStorage.removeItem('company-name')
       resolve()
     })
   }

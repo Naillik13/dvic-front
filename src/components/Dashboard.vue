@@ -1,6 +1,7 @@
 <template>
   <div class="hello text-center">
-    <h1>Welcome to {{ company.companyName }} dashboard</h1>
+    <h1>Bienvenue sur le dashboard de <b>{{ company.companyName }}</b></h1>
+    <button class="btn btn-lg btn-primary" v-on:click="logout">Logout</button>
     <div class="container">
       <div class="row">
         <div class="col-lg-5 col-sm-12">
@@ -23,13 +24,13 @@
         <div class="offset-lg-1 col-lg-6 col-sm-12">
           <div class="row dashboard-section-container">
             <h3 class="col-12 d-flex justify-content-between">Gérer les projets<font-awesome-icon icon="network-wired" /></h3>
-            <router-link class="col-4" to="/clients">
+            <router-link v-if="projectTypes.length > 0" class="col-4" to="/clients">
               <div class="dashboard-section">
                 <font-awesome-icon icon="project-diagram" />
                 <div>Liste des projets</div>
               </div>
             </router-link>
-            <router-link class="col-4"  to="/create-client">
+            <router-link v-if="projectTypes.length > 0" class="col-4"  to="/create-client">
               <div class="dashboard-section">
                 <font-awesome-icon icon="briefcase" />
                 <div>Ajouter un projet</div>
@@ -50,10 +51,29 @@
 
 <script>
 import {mapState} from 'vuex'
+import {HTTP} from '../common/http-common'
+import {AUTH_LOGOUT} from '../store/actions/auth'
 
 export default {
   name: 'Dashboard',
-  computed: mapState({company: 'company'})
+  computed: mapState({company: 'company'}),
+  data () {
+    return {
+      projectTypes: []
+    }
+  },
+  created () {
+    HTTP.get('companies/' + localStorage.getItem('company-id') + '/project-types').then(response => {
+      // JSON responses are automatically parsed.
+      this.projectTypes = response.data
+    })
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch(AUTH_LOGOUT)
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

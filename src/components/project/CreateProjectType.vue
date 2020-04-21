@@ -12,7 +12,7 @@
           </div>
           <div>
             <p class="text-danger"> {{error}}</p>
-            <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Create client</button>
+            <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Create project type</button>
           </div>
         </div>
       </form>
@@ -37,8 +37,8 @@ export default {
   methods: {
     createProjectType: function () {
       const { code, label } = this
-      console.log(this.company.company._id)
-      HTTP.post('project-types', {code: code, label: label, company: this.company.company._id}).then(_ => {
+      console.log(this.company.companyId)
+      HTTP.post('project-types', {code: code, label: label, company: this.company.companyId}).then(_ => {
         this.$router.push('/')
       }).catch(err => {
         if (err.response.data) {

@@ -46,4 +46,9 @@ export default {
     text-decoration: none;
     color: #1b5f40;
   }
+  .btn {
+    color: #fff;
+    background-color: #42b983;
+    border-color: #42b983;
+  }
 </style>

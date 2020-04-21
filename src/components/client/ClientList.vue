@@ -33,7 +33,7 @@ export default {
     }
   },
   created () {
-    HTTP.get('clients').then(response => {
+    HTTP.get('companies/' + localStorage.getItem('company-id') + '/clients').then(response => {
       // JSON responses are automatically parsed.
       this.clients = response.data
     })

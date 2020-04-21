@@ -64,7 +64,8 @@ const mutations = {
     state.status = 'error'
   },
   [AUTH_LOGOUT]: state => {
-    state.company = {}
+    state.companyId = ''
+    state.companyName = ''
   }
 }
 
