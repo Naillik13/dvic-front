@@ -12,7 +12,7 @@
                 <div>Liste des clients</div>
               </div>
             </router-link>
-            <router-link class="col-4"  to="/clients">
+            <router-link class="col-4"  to="/create-client">
               <div class="dashboard-section">
                 <font-awesome-icon icon="user-plus" />
                 <div>Ajouter un client</div>

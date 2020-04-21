@@ -1,13 +1,15 @@
 import { COMPANY_USER_REQUEST, COMPANY_REQUEST, COMPANY_ERROR, COMPANY_SUCCESS } from '../actions/company'
-import Vue from 'vue'
 import { AUTH_LOGOUT } from '../actions/auth'
 import {HTTP} from '../../common/http-common'
 
-const state = { status: '', company: {} }
+const state = {
+  status: '',
+  company: localStorage.getItem('company') || {}
+}
 
 const getters = {
   getCompany: state => state.company,
-  isCompanyLoaded: state => !!state.company.name
+  isCompanyLoaded: state => !!state.company
 }
 
 const actions = {
@@ -16,6 +18,7 @@ const actions = {
       commit(COMPANY_USER_REQUEST)
       HTTP.get('users/' + userId + '/company')
         .then(resp => {
+          localStorage.setItem('company', resp.data)
           commit(COMPANY_SUCCESS, resp.data)
           resolve(resp)
         })
@@ -30,6 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit(COMPANY_REQUEST)
       HTTP.post('companies', company).then(resp => {
+        localStorage.setItem('company', resp.data)
         commit(COMPANY_SUCCESS, resp.data)
         resolve(resp)
       }).catch((err) => {
@@ -50,7 +54,7 @@ const mutations = {
   },
   [COMPANY_SUCCESS]: (state, company) => {
     state.status = 'success'
-    Vue.set(state, 'company', company)
+    state.company = company
   },
   [COMPANY_ERROR]: state => {
     state.status = 'error'

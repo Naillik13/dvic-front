@@ -5,16 +5,17 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Email</th>
-          <th scope="col">Admin</th>
+          <th scope="col">Name</th>
+          <th scope="col">Siret</th>
+          <th scope="col">Contact</th>
         </tr>
         </thead>
         <tbody>
           <tr v-for="(client, index) in clients"  :key="client.email">
             <th scope="row">{{ index }}</th>
-            <td>{{ client.email }}</td>
-            <td v-if="client.admin"><font-awesome-icon icon="check"/></td>
-            <td v-else><font-awesome-icon icon="times"/></td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.siret }}</td>
+            <td>{{ client.contact }}</td>
           </tr>
         </tbody>
       </table>
@@ -32,9 +33,7 @@ export default {
     }
   },
   created () {
-    localStorage.removeItem('user-token')
-
-    HTTP.get('users').then(response => {
+    HTTP.get('clients').then(response => {
       // JSON responses are automatically parsed.
       this.clients = response.data
     })

@@ -4,8 +4,9 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import ClientList from '@/components/client/ClientList'
 import store from '../store'
-import SignUp from '../components/SignUp'
-import CreateCompany from '../components/CreateCompany'
+import SignUp from '@/components/SignUp'
+import CreateCompany from '@/components/CreateCompany'
+import CreateClient from '@/components/client/CreateClient'
 
 Vue.use(Router)
 
@@ -27,6 +28,7 @@ const ifAuthenticated = (to, from, next) => {
 
 const ifAuthenticatedAndCompanyExist = (to, from, next) => {
   if (store.getters.isAuthenticated) {
+    console.log(localStorage.getItem('company'))
     if (store.getters.isCompanyLoaded) {
       next()
       return
@@ -67,7 +69,14 @@ export default new Router({
     {
       path: '/clients',
       name: 'ClientList',
-      component: ClientList
+      component: ClientList,
+      beforeEnter: ifAuthenticatedAndCompanyExist
+    },
+    {
+      path: '/create-client',
+      name: 'CreateClient',
+      component: CreateClient,
+      beforeEnter: ifAuthenticatedAndCompanyExist
     }
   ]
 })

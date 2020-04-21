@@ -21,6 +21,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 const token = localStorage.getItem('user-token')
+console.log(localStorage.getItem('user-token'))
+console.log(localStorage.getItem('company'))
 
 if (token) {
   HTTP.defaults.headers.common['Authorization'] = token
