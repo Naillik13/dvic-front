@@ -1,34 +1,51 @@
 <template>
   <div class="hello">
     <div class="container">
-      <form class="form-login" @submit.prevent="login">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input required v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input required v-model="password" type="password" id="inputPassword" class="form-control mb-3" placeholder="Password">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+      <div class="row">
+        <form class="form-login offset-3 col-6" @submit.prevent="login">
+          <h1 class="h3 mb-3 text-center font-weight-normal">Please sign in</h1>
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input required v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input required v-model="password" type="password" id="inputPassword" class="form-control mb-3" placeholder="Password">
+          <p class="text-danger"> {{error}}</p>
+          <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Sign in</button>
+          <div class="mb-3 text-center">OR</div>
+          <div class="text-center">
+            <router-link to="/signup">
+              Create an account for your company
+            </router-link>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { AUTH_REQUEST } from '../store/actions/auth'
+import {COMPANY_USER_REQUEST} from '../store/actions/company'
 
 export default {
   name: 'Login',
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     }
   },
   methods: {
     login: function () {
       const { email, password } = this
-      this.$store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
-        this.$router.push('/')
+      this.$store.dispatch(AUTH_REQUEST, { email, password }).then((userId) => {
+        this.$store.dispatch(COMPANY_USER_REQUEST, userId).then(() => {
+          this.$router.push('/')
+        })
+      }).catch(err => {
+        if (err.response.data) {
+          this.error = err.response.data.message
+        }
       })
     }
   }
@@ -36,12 +53,6 @@ export default {
 </script>
 
 <style scoped>
-  .form-login {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-  }
   .btn-block {
     color: #fff;
     background-color: #42b983;

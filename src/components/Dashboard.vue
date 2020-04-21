@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="hello text-center">
+    <h1>Welcome to {{ company.company.name }} dashboard</h1>
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-sm-12">
@@ -32,17 +32,14 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'Dashboard',
-  data () {
-    return {
-      msg: 'Welcome to DVIC dashboard'
-    }
-  }
+  computed: mapState({company: 'company'})
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
   font-weight: normal;
@@ -50,12 +47,6 @@ h1 {
 h3 {
   margin-bottom: 1em;
   font-size: 1.5em;
-}
-a {
-  color: #42b983;
-}
-a:hover {
-  text-decoration: none;
 }
 .dashboard-section-container {
   background-color: #f1f1f1;

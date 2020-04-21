@@ -31,7 +31,6 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     margin-top: 60px;
   }
@@ -39,5 +38,12 @@ export default {
     border-color: #41b983;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(65, 185, 131, 0.28);
     box-shadow: 0 0 0 0.2rem rgba(65, 185, 131, 0.28);
+  }
+  a {
+    color: #42b983;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #1b5f40;
   }
 </style>

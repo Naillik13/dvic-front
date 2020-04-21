@@ -5,7 +5,7 @@ import {
   AUTH_SUCCESS,
   AUTH_LOGOUT
 } from '../actions/auth'
-import {COMPANY_REQUEST} from '../actions/company'
+import {COMPANY_USER_REQUEST} from '../actions/company'
 import {HTTP} from '../../common/http-common'
 
 const state = {
@@ -32,8 +32,8 @@ const actions = {
           localStorage.setItem('user-id', userId)
           HTTP.defaults.headers.common['Authorization'] = 'Bearer ' + token
           commit(AUTH_SUCCESS, token, userId)
-          dispatch(COMPANY_REQUEST, userId)
-          resolve(resp)
+          dispatch(COMPANY_USER_REQUEST, userId)
+          resolve(userId)
         })
         .catch(err => {
           commit(AUTH_ERROR, err)
